@@ -7,9 +7,14 @@
 #--------------------Importations---------------------#
 from dense_layer import Dense
 from activation_layer import Activation
+from convolution_layer import Convolution
+from reshape_layer import Reshape
 
-from activations_functions import tanh, d_tanh
-from losses_functions import min_square, d_min_square
+from activations_functions import tanh, d_tanh, sigmoid, d_sigmoid
+from losses_functions import min_square, d_min_square, log_loss, d_log_loss
+
+import pickle
+import numpy as np
 #-----------------------------------------------------#
 
 #----Classe Réseaux de Neurones----#
@@ -18,6 +23,7 @@ class Network:
         self.layers = layers
         self.loss = None
         self.d_loss = None
+        self.errors = []
     #-------------------------------
     """Intialise la fontions coût"""
     #-------------------------------
@@ -59,6 +65,8 @@ class Network:
                 #--------------------------------------#
                 
                 #----Erreur commise pour ce jeu de données----#
+                #if(np.argmax(targets[j]) != np.argmax(output)):
+                #    error += 1
                 error += self.loss(targets[j], output)
                 #---------------------------------------------#
                 
@@ -71,7 +79,20 @@ class Network:
             
             #----Affichage simple----#
             error /= n_inputs
-            if(get_info and e%100 == 0):
+            self.errors.append(error)
+            if(get_info and e%1 == 0):
                 print('[Traning] -> ', 100*e/epochs, '%', '| [Error] ->', round(error,4))
             #------------------------#
         #----Fin Nombre d'iteration----#
+
+    #-------------------------
+    """Enregistre le model"""
+    #-------------------------
+    def save_model(self, model_name):
+        pickle.dump(self, file = open(model_name+'.pickle', "wb"))
+
+    #----------------------
+    """Charge un model"""
+    #----------------------
+    def load_model(self, model):
+        return pickle.load(open(model+'.pickle', "rb"))

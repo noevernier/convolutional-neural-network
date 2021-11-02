@@ -6,11 +6,11 @@ import numpy as np
 class Dense(Layer):
     def __init__(self, input_size, output_size):
         #----Matrice des poids----#
-        self.w = np.random.rand(output_size, input_size)-0.5
+        self.w = np.random.randn(output_size, input_size)
         #-------------------------#
         
         #----Matrice des biais----#
-        self.b = np.random.rand(output_size, 1)-0.5
+        self.b = np.random.randn(output_size, 1)
         #-------------------------#
         
     #---------------------------
@@ -37,8 +37,8 @@ class Dense(Layer):
         #--------------------------#
         
         #----Application des gradients----#
-        self.w -= alpha * grad_w
-        self.b -= alpha * grad_o
+        self.w = self.w - alpha * grad_w
+        self.b = self.b - alpha * grad_o
         #---------------------------------#
     
         return grad_i
