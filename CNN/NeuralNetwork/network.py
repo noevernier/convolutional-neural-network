@@ -9,12 +9,14 @@ from dense_layer import Dense
 from activation_layer import Activation
 from convolution_layer import Convolution
 from reshape_layer import Reshape
+from pool_layer import Pool
 
-from activations_functions import tanh, d_tanh, sigmoid, d_sigmoid
+from activations_functions import tanh, d_tanh, sigmoid, d_sigmoid, relu, d_relu
 from losses_functions import min_square, d_min_square, log_loss, d_log_loss
 
 import pickle
 import numpy as np
+import time
 #-----------------------------------------------------#
 
 #----Classe Réseaux de Neurones----#
@@ -81,7 +83,7 @@ class Network:
             error /= n_inputs
             self.errors.append(error)
             if(get_info and e%1 == 0):
-                print('[Traning] -> ', 100*e/epochs, '%', '| [Error] ->', round(error,4))
+                print('[Traning] -> ', round(100*e/epochs,1), '%', '| [Error] ->', round(error,4))
             #------------------------#
         #----Fin Nombre d'iteration----#
 

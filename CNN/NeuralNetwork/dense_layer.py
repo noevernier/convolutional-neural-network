@@ -1,6 +1,7 @@
 #--------------------Importations---------------------#
 from base_layer import Layer
 import numpy as np
+import time
 #-----------------------------------------------------#
 
 class Dense(Layer):
@@ -27,7 +28,7 @@ class Dense(Layer):
     """Calcul des gradients"""
     #---------------------------
     def backward(self, grad_o, alpha):
-        
+                
         #----Gradient d'entrée----#
         grad_i = np.dot(self.w.T, grad_o)
         #-------------------------#
