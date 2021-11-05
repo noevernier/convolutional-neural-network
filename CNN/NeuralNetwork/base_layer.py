@@ -8,6 +8,6 @@ class Layer:
         #----Parcours----#
         pass
 
-    def backward(self, grad_o, alpha):
+    def backward(self, grad_o, alpha, grad_method):
         #----Retour avec calcul de gradient----#
         pass

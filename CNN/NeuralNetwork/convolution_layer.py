@@ -30,7 +30,7 @@ class Convolution(Layer):
             plt.show()
         return self.output
     
-    def backward(self, grad_o, alpha):
+    def backward(self, grad_o, alpha, grad_method):
         
         grad_k = np.zeros(self.k_shape)
         grad_i = np.zeros(self.input_shape)

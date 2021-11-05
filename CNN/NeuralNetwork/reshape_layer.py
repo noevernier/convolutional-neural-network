@@ -16,7 +16,7 @@ class Reshape(Layer):
         
         return self.output
     
-    def backward(self, grad_o, alpha):
+    def backward(self, grad_o, alpha, grad_method):
         
         grad_i = np.reshape(grad_o, self.input_shape)
         

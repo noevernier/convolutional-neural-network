@@ -23,7 +23,7 @@ class Pool(Layer):
         mask = x == np.max(x)
         return mask
     
-    def backward(self, grad_o, alpha):
+    def backward(self, grad_o, alpha, grad_method):
         
         grad_i = np.zeros(self.input.shape)
         depth, output_width, output_height = grad_o.shape
