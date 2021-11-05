@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 x_train = np.reshape([[0, 0], [0, 1], [1, 0], [1, 1]], (4, 2, 1))
 y_train = np.reshape([[0], [1], [1], [0]], (4, 1, 1))
 
-network = Network.load_model(None, "xor")
+network = Network.load_model(None, "xor_momentum")
 
 def get_points():
     points = []
@@ -27,4 +27,12 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 points = get_points()
 ax.scatter(points[:, 0], points[:, 1], points[:, 2], c=points[:, 2], cmap='twilight_shifted')
+plt.show()
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+
+#ax.scatter([i for i in range(len(network.errors))], network.errors, c=network.errors, cmap='twilight_shifted', s=1.5)
+
+ax.plot([i for i in range(len(network.errors))], network.errors, color='red')
 plt.show()

@@ -25,7 +25,7 @@ class Activation(Layer):
     #---------------------------
     """Calcul des gradients"""
     #---------------------------
-    def backward(self, grad_o, alpha):
+    def backward(self, grad_o, alpha, grad_method):
         #----Gradient d'entrée----#
         grad_i = np.multiply(grad_o, self.d_act_fun(self.input))
         #-------------------------#

@@ -11,17 +11,16 @@ x_train = np.reshape([[0, 0], [0, 1], [1, 0], [1, 1]], (4, 2, 1))
 y_train = np.reshape([[0], [1], [1], [0]], (4, 1, 1))
 
 layers = [
-    Dense(2, 2),
+    Dense(2, 3),
     Activation(tanh, d_tanh),
-    Dense(2, 1),
+    Dense(3, 1),
     Activation(tanh, d_tanh)
 ]
 network = Network(layers)
-network.use(min_square, d_min_square)
-network.train(x_train, y_train, epochs=10000, learning_rate=0.1, get_info=True)
+network.set_loss(min_square, d_min_square)
+network.train(x_train, y_train, epochs=100, learning_rate=0.1, get_info=True, grad_method="")
+network.save_model("xor_momentum")
 
-print(network.layers[0].b)
-print(network.layers[2].b)
 """
 def get_points():
     points = []
@@ -34,7 +33,7 @@ def get_points():
     return points
 
 
-for e in range(300):
+for e in range(100):
     network.train(x_train, y_train, epochs=1, learning_rate=0.1, get_info=False)
     points = get_points()
     fig = plt.figure()

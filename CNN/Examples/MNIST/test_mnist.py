@@ -29,8 +29,8 @@ network = Network.load_model(None, 'mnist')
 y_test_predict = network.predict(x_test)
 error = 0
 
-deb = 0
-fin = 500
+deb = 500
+fin = 1000
 for i in range(deb, fin):
     pred = np.reshape(np.round(y_test_predict[i],2), (1,10))
     print(pred)

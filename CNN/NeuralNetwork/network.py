@@ -29,7 +29,7 @@ class Network:
     #-------------------------------
     """Intialise la fontions coût"""
     #-------------------------------
-    def use(self, loss, d_loss):
+    def set_loss(self, loss, d_loss):
         self.loss = loss
         self.d_loss = d_loss
 
@@ -50,7 +50,7 @@ class Network:
     #---------------------------------------
     """Entrainement du réseau de neurones"""
     #---------------------------------------
-    def train(self, inputs, targets, epochs, learning_rate, get_info):
+    def train(self, inputs, targets, epochs, learning_rate, get_info, grad_method):
         #----Nombre de jeu de données----#
         n_inputs = len(inputs)
         #--------------------------------#
@@ -75,7 +75,7 @@ class Network:
                 #----Calcul du gradient pour chaques couches----#
                 grad = self.d_loss(targets[j], output)
                 for layer in reversed(self.layers):
-                    grad = layer.backward(grad, learning_rate) #<--- Application du gradient
+                    grad = layer.backward(grad, learning_rate, grad_method) #<--- Application du gradient
                 #-----------------------------------------------#
             #-----------------------------------#
             

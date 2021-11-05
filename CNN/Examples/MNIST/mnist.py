@@ -23,7 +23,7 @@ samples = 500
     
 x_train = np.reshape(train_imgs[:samples], (samples, 1, image_size, image_size))
 y_train = np.reshape(train_labels[:samples], (samples, 10, 1))
-
+"""
 layers = [
     Convolution((1, 28, 28), 3, 5),
     Pool(4),
@@ -33,8 +33,18 @@ layers = [
     Activation(sigmoid, d_sigmoid),
     Dense(100, 10),
     Activation(sigmoid, d_sigmoid)
+]"""
+
+layers = [
+    Reshape((1, 28, 28), (1 * 28 * 28, 1)),
+    Dense(1 * 28 * 28, 100),
+    Activation(sigmoid, d_sigmoid),
+    Dense(100, 50),
+    Activation(sigmoid, d_sigmoid),
+    Dense(50, 10),
+    Activation(sigmoid, d_sigmoid)
 ]
 network = Network(layers)
-network.use(log_loss, d_log_loss)
-network.train(x_train, y_train, epochs=200, learning_rate=0.1, get_info=True)
+network.set_loss(log_loss, d_log_loss)
+network.train(x_train, y_train, epochs=20, learning_rate=0.1, get_info=True)
 network.save_model('mnist')

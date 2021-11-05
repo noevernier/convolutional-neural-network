@@ -5,7 +5,7 @@ image_folder = 'CNN/Examples/images'
 video_name = 'video.mp4'
 
 images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
-images = ['frame'+str(i)+'.png' for i in range(300)]
+images = ['frame'+str(i)+'.png' for i in range(100)]
 print(images)
 frame = cv2.imread(os.path.join(image_folder, images[0]))
 height, width, layers = frame.shape
