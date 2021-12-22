@@ -1,5 +1,6 @@
 from os import error
 import sys
+from colorama import Fore, Back, Style
 
 sys.path.append("/Users/noe/Documents/School/MP*/Tipe/Informatique/CNN/NeuralNetwork")
 
@@ -11,7 +12,7 @@ import matplotlib.pyplot as plt
 image_size = 28
 image_pixels = image_size * image_size
 
-data_path = "CNN/Examples/MNIST/"
+data_path = "/Users/noe/Documents/School/MP*/Tipe/Informatique/CNN/Examples/MNIST/"
 train_data = np.loadtxt(data_path + "mnist_test.csv", delimiter=",")
 
 fac = 0.99 / 255
@@ -29,19 +30,24 @@ network = Network.load_model(None, 'mnist')
 y_test_predict = network.predict(x_test)
 error = 0
 
-deb = 500
-fin = 1000
+deb = 0
+fin = 800
 for i in range(deb, fin):
-    pred = np.reshape(np.round(y_test_predict[i],2), (1,10))
-    print(pred)
-    if(np.argmax(y_test_predict[i]) != np.argmax(y_test[i])):
+    #pred = np.reshape(np.round(y_test_predict[i],2), (1,10))
+    target = np.argmax(y_test[i])
+    guess = np.argmax(y_test_predict[i])
+    if(target != guess):
+        print(Fore.RED + "[*] The Number : ", target, " - The Guess : ", guess)
         error +=1
+    else:
+        print(Fore.GREEN + "[*] The Number : ", target, " - The Guess : ", guess)
     #print('Prediction  : ', np.argmax(y_test_predict[i]), "Target : ", np.argmax(y_test[i]))
 
-print("[Toral Error] -> ", 100*error/(fin-deb), '%')
+print(Fore.YELLOW, "[Toral Error] -> ", 100*error/(fin-deb), '%')
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
 
-ax.scatter([i for i in range(len(network.errors))], network.errors, c=network.errors, cmap='twilight_shifted')
-plt.savefig('CNN/Examples/images/errors.png')
+#ax.scatter([i for i in range(len(network.errors))], network.errors, c=network.errors, cmap='twilight_shifted')
+ax.plot([i for i in range(len(network.errors))], network.errors, color='red')
+plt.savefig('/Users/noe/Documents/School/MP*/Tipe/Informatique/CNN/Examples/images/errors.png')

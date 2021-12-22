@@ -7,11 +7,11 @@ import time
 class Dense(Layer):
     def __init__(self, input_size, output_size):
         #----Matrice des poids----#
-        self.w = np.random.randn(output_size, input_size)
+        self.w = 2*np.random.rand(output_size, input_size)-1
         #-------------------------#
         
         #----Matrice des biais----#
-        self.b = np.random.randn(output_size, 1)
+        self.b = 2*np.random.rand(output_size, 1)-1
         #-------------------------#
         
         #----Inertials terms-----#

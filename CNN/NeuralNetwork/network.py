@@ -17,6 +17,7 @@ from losses_functions import min_square, d_min_square, log_loss, d_log_loss
 import pickle
 import numpy as np
 import time
+from colorama import Fore, Back, Style
 #-----------------------------------------------------#
 
 #----Classe Réseaux de Neurones----#
@@ -83,7 +84,7 @@ class Network:
             error /= n_inputs
             self.errors.append(error)
             if(get_info and e%1 == 0):
-                print('[Traning] -> ', round(100*e/epochs,1), '%', '| [Error] ->', round(error,4))
+                print(Fore.GREEN , '[Traning]'+Fore.LIGHTCYAN_EX+ '-> ', Fore.BLUE , round(100*e/epochs,1), '%', '|' + Fore.RED +'[Error]' + Fore.LIGHTCYAN_EX+ '->', Fore.BLUE, round(error*100,3), '%')
             #------------------------#
         #----Fin Nombre d'iteration----#
 
