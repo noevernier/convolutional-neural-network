@@ -1,7 +1,5 @@
 import sys
 
-sys.path.append("/Users/noe/Documents/School/MP*/Tipe/Informatique/CNN/NeuralNetwork")
-
 from network import *
 
 import numpy as np
